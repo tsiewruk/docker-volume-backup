@@ -19,7 +19,8 @@ docker-volume-backup create prometheus_volume /opt/backup/prometheus.tar
 Restore volume backup
 docker-volume-backup restoree <destination_path/backup_name.tar> <volume_name>
 Example:
-docker-volume-backup restore /opt/backup/prometheus.tar prometheus_volume```
+docker-volume-backup restore /opt/backup/prometheus.tar prometheus_volume
+```
 
 ## Cron Usage
 `* * * * * /usr/local/bin/docker-volume-backup <volume_name> <destination_path/backup_name.tar>`
