@@ -3,7 +3,7 @@
 The purpose of the script is to create a snapshot of the Docker volume.
 
 ## Installation
-`sudo curl -SL  -o /usr/local/bin/docker-volume-backup`
+`sudo curl -SL https://github.com/tsiewruk/docker-volume-backup/blob/main/docker-volume-backup -o /usr/local/bin/docker-volume-backup`
 
 `sudo chmod +x /usr/local/bin/docker-volume-backup`
 
@@ -11,7 +11,8 @@ The purpose of the script is to create a snapshot of the Docker volume.
 - `python` - minimum version 3.10
 
 ## Usage
-```Create volume backup:
+```
+Create volume backup:
 docker-volume-back create <volume_name> <destination_path/backup_name.tar>
 Example:
 docker-volume-backup create prometheus_volume /opt/backup/prometheus.tar
