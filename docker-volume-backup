@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+import sys
+import os
+import subprocess
+
+def help():
+    print("Usage:")
+    print("Create volume backup:")
+    print("docker-volume-back create <volume_name> <destination_path/backup_name.tar>")
+    print("Example:")
+    print("docker-volume-backup create prometheus_volume /opt/backup/prometheus.tar")
+
+    print("Restore volume backup")
+    print("docker-volume-backup restoree <destination_path/backup_name.tar> <volume_name>")
+    print("Example:")
+    print("docker-volume-backup restore /opt/backup/prometheus.tar prometheus_volume")
+
+def create(source, destination, directory):
+    subprocess.run(["docker", "run", "--rm", "-v", "{}:/source".format(source), "-v", "{}:/dest".format(directory), "busybox", "tar", "cvaf", "/dest/{}".format(os.path.basename(destination)), "-C", "/source", "."])
+
+def restore(destination, source, directory):
+    subprocess.run(["docker", "run", "--rm", "-v", "{}:/dest".format(destination), "-v", "{}:/source".format(directory), "busybox", "tar", "xvf", "/source/{}".format(os.path.basename(source)), "-C", "/dest"])
+
+def main():
+
+    if len(sys.argv) < 4:
+        help()
+        sys.exit(1)
+
+    command = sys.argv[1]
+    source = sys.argv[2]
+    destination = sys.argv[3]
+    directory = os.path.dirname(destination)
+
+    if command == 'help':
+        help()
+    elif command == 'create':
+        create(source, destination, directory)
+    elif command == 'restore':
+        restore(destination, source, directory)
+    else:
+        print("Invalid choice. Choose again.")
+
+if __name__ == "__main__":
+    main()
