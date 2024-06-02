@@ -12,7 +12,7 @@ sudo chmod +x /usr/local/bin/docker-volume-backup
 ```
 
 ## Requirements
-- `python` - minimum version 3.10
+- `go` 
 
 ## Usage
 ```
